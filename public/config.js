@@ -13,11 +13,14 @@
  */
 
 var config = {
-    apiKey: "XnQbdCg4LlUWwLSmIq_4Opog",
+    apiKey: "AIzaSyCI-M8s0ejoE6rOzaiJBusXp1exWavWz_Y",
     authDomain: "examenux-70960.firebaseapp.com",
-    databaseURL: "https://examenux-70960.firebaseio.com/",
-    storageBucket: "gs://examenux-70960.appspot.com",
+    databaseURL: "https://examenux-70960.firebaseio.com",
+    projectId: "examenux-70960",
+    storageBucket: "examenux-70960.appspot.com",
+    messagingSenderId: "254094424764"
 };
+
 firebase.initializeApp(config);
 
 // Google OAuth Client ID, needed to support One-tap sign-up.

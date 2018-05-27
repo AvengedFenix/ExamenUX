@@ -111,12 +111,25 @@ var signInWithPopup = function() {
  * Displays the UI for a signed in user.
  * @param {!firebase.User} user
  */
+var newUser = true;
 var handleSignedInUser = function(user) {
     document.getElementById('user-signed-in').style.display = 'block';
     document.getElementById('user-signed-out').style.display = 'none';
     document.getElementById('name').textContent = user.displayName;
     document.getElementById('email').textContent = user.email;
     document.getElementById('phone').textContent = user.phoneNumber;
+
+
+    var ref = firebase.database().ref().child("Usuarios").child(user.uid);
+
+    if (newUser) {
+        ref.child("UID").set(user.uid);
+        ref.child("Name").set(user.displayName);
+        ref.child("Email").set(user.email);
+        ref.child("Phone Number").set(user.phoneNumber);
+        ref.child("Photo URL").set(user.photoURL);
+    }
+
     if (user.photoURL) {
         var photoURL = user.photoURL;
         // Append size to the photo URL for Google hosted images to avoid requesting
@@ -133,6 +146,7 @@ var handleSignedInUser = function(user) {
         document.getElementById('photo').style.display = 'none';
     }
 };
+
 
 
 /**
@@ -214,18 +228,17 @@ var initApp = function() {
 
 window.addEventListener('load', initApp);
 
+//var ref = firebase.database.ref();
 
-function submitClick() {
+/*function submitClick() {
     //    var messageText = publicMessage.value;
-    var fName = fname.value;
-    var lname = lname.value;
-    var password = password.value;
-    var firebaseRef = firebase.database().ref('/Users/ID/' + publicMessage).set(messageText);
-    firebase.database().ref('/Users/ID/' + 1).set({
-        lastName: lname;
-        userName: fname;
-        password: password;
-    })
+    var firstName = fName.value;
+    var lastName = lName.value;
+    var passwordJS = password.value;
+    //var firebaseRef = firebase.database().ref('/Users/ID/' + publicMessage).set(messageText);
+    //ref.child("Usuarios").child(user.id).child("UID").set(user.id);
+    ref.child("Users").child(user.uid).child("userName").set(user.displayName);
+
 
     //firebaseRef.child("publicMessage").set(messageText);
-}
+}*/
