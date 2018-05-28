@@ -35,42 +35,58 @@
                     <br>
                     <br>
                     <br>
-                    <div id="user-info">
-                        <div id="photo-container">
-                            <img id="photo">
-                        </div>
-                        <div id="name"></div>
-                        <div id="email"></div>
-                        <div id="phone"></div>
-                        <div id="is-new-user"></div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <h3>Welcome!</h3>
-                    <br>
-                    <h4 id="userNameSignedIn"></h4>
-                    <div class="row">
-                        <!--col es el espacio de la grid, entre mayor numero mas espacio-->
-
-                        <div class="mx-auto">
-                            <h4 id="timeline">Timeline</h4>
-                            <div class="form-group">
-                                <br>
-                                <label for="publicMessage">Your Text here</label>
-                                <br>
-                                <input class="p-3 mb-2 bg-light text-dark" type="text" name="from-control" id="publicMessage">
+                    <div class="mx-auto">
+                        <div class="card text-white bg-dark mb-3 mx-auto" style="max-width: 18rem;">
+                            <div class="card-header">
+                                <img id="photo" class="mx-auto">
+                                <!--< <div id="user-info">
+                                       div id="photo-container">
+                                    </div>
+                                    </div>-->
+                                </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <div id="name"></div>
+                                        </h5>
+                                        <p class="card-text">
+                                            <div id="email"></div>
+                                            <div id="phone"></div>
+                                            <div id="is-new-user"></div>
+                                            <div class="clearfix"></div>
+                                        </p>
+                                    </div>
                             </div>
-                            <button type="button" class="btn btn-dark" onclick="submitClick('mensajePublico')">Post Public!</button>
-                            <button type="button" class="btn btn-dark" onclick="submitClick('mensajePrivado')">Post Private!</button>
-                            <form id="setMessages">
-
-                            </form>
-
                         </div>
+                        <p>
+                            <button class="btn btn-secondary" id="sign-out">Sign Out</button>
+                            <button class="btn btn-danger" id="delete-account">Delete account</button>
+                        </p>
+                        <h3>Welcome!</h3>
+                        <br>
+                        <h4 id="userNameSignedIn"></h4>
+
+                        <div class="row">
+                            <!--col es el espacio de la grid, entre mayor numero mas espacio-->
+
+                            <div class="mx-auto">
+                                <h4 id="timeline">Timeline</h4>
+                                <div class="form-group">
+                                    <br>
+                                    <label for="publicMessage">Your Text here</label>
+                                    <br>
+                                    <input class="p-3 mb-2 bg-light text-dark" type="text" name="from-control" id="publicMessage">
+                                </div>
+                                <button type="button" class="btn btn-dark" onclick="submitClick('mensajePublico')">Post Public!</button>
+                                <button type="button" class="btn btn-dark" onclick="submitClick('mensajePrivado')">Post Private!</button>
+                                <form id="setMessages">
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <br>
+                        <br>
                     </div>
-                    <p>
-                        <button id="sign-out">Sign Out</button>
-                        <button id="delete-account">Delete account</button>
-                    </p>
                 </div>
                 <div id="firebaseui-spa">
                     <br>
@@ -107,20 +123,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html" onclick="printPrivateMessages()">Profile</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
+                            <a class="nav-link" href="#" id="signOutNav">Sign out</a>
                         </li>
                     </ul>
                 </div>
@@ -143,7 +147,7 @@
             firebase.initializeApp(config);
         </script>
         <!--End Firebase-->
-        
+
         <!--Begin Bootstrap-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>

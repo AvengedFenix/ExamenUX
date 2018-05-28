@@ -220,6 +220,10 @@ var initApp = function () {
             deleteAccount();
         });
 
+    document.getElementById('signOutNav').addEventListener(
+        'click', function () {
+            firebase.auth().signOut();
+        });
     /*document.getElementById('recaptcha-normal').addEventListener(
         'change', handleRecaptchaConfigChange);
     document.getElementById('recaptcha-invisible').addEventListener(
