@@ -14,7 +14,7 @@ function submitClick() {
     setName(user);
 
     var mensaje = publicMessage.value;
-    window.alert(mensaje + " mierda para ponerme a pija");
+    window.alert("Su mensaje es: " + mensaje);
 
     console.log("Este es mensaje: " + mensaje);
     ref.child("Mensajes").push().set({
@@ -23,22 +23,23 @@ function submitClick() {
         mensajePublico: mensaje
     });
 
-    var counterPublic = firebase.database().ref().child("Usuarios").child(user.uid).child("mensajesPublicos");
+    var counterPublic = firebase.database().ref().child("Usuarios").child(user.uid);
 
-    counterPublic.on('value', function(datasnapshot) {
-        var number = datasnapshot.val();
+    var number;
+    counterPublic.child("mensajesPublicos").once('value').then(function (datasnapshot) {
+        number = datasnapshot.val();
         console.log("Este es number: " + number);
-        castedNumber = Number(number);
-        /*if (isNaN(castedNumber)) {
-            castedNumber = 0;
-        } else {
-            console.log("Despues de la asignación: " + castedNumber);
-            castedNumber += 1;
-        }*/
+        //castedNumber = Number(number);
+        if (number == null) {
+            number = 0;
+        }
+        console.log("Despues de la asignación: " + number);
+        counterPublic.child("mensajesPublicos").set(number+1);
 
-        console.log("Numero de mensajes publicos: " + castedNumber.toString());
-        counterPublic.set(number + 1);
-    })
+
+        //console.log("Numero de mensajes privados: " + castedNumber.toString());
+    });
+    printPrivateMessages();
     printMessages();
 }
 
@@ -48,7 +49,7 @@ function submitClickPrivate() {
     setName(user);
 
     var mensaje = publicMessage.value;
-    window.alert(mensaje + " mierda para ponerme a pija");
+    window.alert("Este es su mensaje: " + mensaje);
 
     console.log("Este es mensaje: " + mensaje);
     ref.child("Mensajes").push().set({
@@ -57,28 +58,28 @@ function submitClickPrivate() {
         mensajePrivado: mensaje
     });
 
-    var counterPublic = firebase.database().ref().child("Usuarios").child(user.uid).child("mensajesPrivados");
+    var counterPublic = firebase.database().ref().child("Usuarios").child(user.uid);
 
-    counterPublic.on('value', function(datasnapshot) {
-        var number = datasnapshot.val();
+    var number;
+    counterPublic.child("mensajesPrivados").once('value').then(function (datasnapshot) {
+        number = datasnapshot.val();
         console.log("Este es number: " + number);
-        castedNumber = Number(number);
-        /*if (isNaN(castedNumber)) {
-            castedNumber = 0;
-        } else {
-            console.log("Despues de la asignación: " + castedNumber);
-            castedNumber += 1;
-        }*/
+        //castedNumber = Number(number);
+        if (number == null) {
+            number = 0;
+        }
+        console.log("Despues de la asignación: " + number);
+        counterPublic.child("mensajesPrivados").set(number+1);
 
-        console.log("Numero de mensajes privados: " + castedNumber.toString());
-        //counterPublic.set(number + 1);
-    })
+
+        //console.log("Numero de mensajes privados: " + castedNumber.toString());
+    });
     printPrivateMessages();
 }
 
 
 //autentificacion INSTANCIA usuario y confirmacion de conexion
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         window.alert("You are signed in: " + user.displayName);
     } else {
@@ -102,7 +103,7 @@ function printMessages() {
         var guestUser = snap.child("UID").val();
         var refUser = firebase.database().ref().child("Usuarios").child(guestUser).child("Photo URL");
         var guestPhoto;
-        refUser.on('value', function(laFoto) {
+        refUser.on('value', function (laFoto) {
             guestPhoto = laFoto.val();
 
         })
@@ -132,7 +133,7 @@ function printPrivateMessages() {
         var guestUser = snap.child("UID").val();
         var refUser = firebase.database().ref().child("Usuarios").child(guestUser).child("Photo URL");
         var guestPhoto;
-        refUser.on('value', function(laFoto) {
+        refUser.on('value', function (laFoto) {
             guestPhoto = laFoto.val();
         })
         console.log("Photo URL: " + guestPhoto);
