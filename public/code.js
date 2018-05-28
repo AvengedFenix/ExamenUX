@@ -8,7 +8,7 @@ function setName(user) {
 
 
 //Escribir a la base de datos
-function submitClick() {
+function submitClick(type) {
 
     var user = firebase.auth().currentUser;
     setName(user);
@@ -17,16 +17,61 @@ function submitClick() {
     window.alert("Su mensaje es: " + mensaje);
 
     console.log("Este es mensaje: " + mensaje);
-    ref.child("Mensajes").push().set({
-        userName: user.displayName,
-        UID: user.uid,
-        mensajePublico: mensaje
-    });
+    if (type == "mensajePublico") {
+        ref.child("Mensajes").push().set({
+            userName: user.displayName,
+            UID: user.uid,
+            mensajePublico: mensaje
+        });
+    } else if (type == "mensajePrivado") {
+        ref.child("Mensajes").push().set({
+            userName: user.displayName,
+            UID: user.uid,
+            mensajePublico: mensaje
+        });
+    }
+
 
     var counterPublic = firebase.database().ref().child("Usuarios").child(user.uid);
-
     var number;
-    counterPublic.child("mensajesPublicos").once('value').then(function (datasnapshot) {
+
+    if (type == "mensajePublico") {
+        contando(counterPublic,type,number);
+        /*counterPublic.child("mensajesPublicos").once('value').then(function (datasnapshot) {
+            number = datasnapshot.val();
+            console.log("Este es number: " + number);
+            //castedNumber = Number(number);
+            if (number == null) {
+                number = 0;
+            }
+            console.log("Despues de la asignación: " + number);
+            counterPublic.child("mensajesPublicos").set(number + 1);
+    
+    
+            //console.log("Numero de mensajes privados: " + castedNumber.toString());
+        });*/
+        printMessages();
+    } else if(type == "mensajePrivado"){
+        contando(counterPublic,type,number);
+        /*counterPublic.child("mensajesPrivados").once('value').then(function (datasnapshot) {
+            number = datasnapshot.val();
+            console.log("Este es number: " + number);
+            //castedNumber = Number(number);
+            if (number == null) {
+                number = 0;
+            }
+            console.log("Despues de la asignación: " + number);
+            counterPublic.child("mensajesPrivados").set(number+1);
+    
+    
+            //console.log("Numero de mensajes privados: " + castedNumber.toString());
+        });*/
+        printPrivateMessages();
+    }
+}
+
+function contando(counterPublic, type, number){
+    counterPublic.child(type).once('value').then(function (datasnapshot) {
         number = datasnapshot.val();
         console.log("Este es number: " + number);
         //castedNumber = Number(number);
@@ -34,16 +79,12 @@ function submitClick() {
             number = 0;
         }
         console.log("Despues de la asignación: " + number);
-        counterPublic.child("mensajesPublicos").set(number+1);
-
-
+        counterPublic.child(type).set(number+1);
         //console.log("Numero de mensajes privados: " + castedNumber.toString());
     });
-    printPrivateMessages();
-    printMessages();
 }
 
-function submitClickPrivate() {
+/*function submitClickPrivate() {
 
     var user = firebase.auth().currentUser;
     setName(user);
@@ -75,7 +116,7 @@ function submitClickPrivate() {
         //console.log("Numero de mensajes privados: " + castedNumber.toString());
     });
     printPrivateMessages();
-}
+}*/
 
 
 //autentificacion INSTANCIA usuario y confirmacion de conexion

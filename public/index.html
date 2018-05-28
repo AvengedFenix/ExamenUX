@@ -15,7 +15,8 @@
     <link type="text/css" rel="stylesheet" href="dist/firebaseui.css" />
 
     <!--bootstrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--jquery-->
@@ -31,7 +32,9 @@
             <div id="main">
                 <div id="user-signed-in" class="hidden">
                     <script src="code.js"></script>
-                    <br><br><br>
+                    <br>
+                    <br>
+                    <br>
                     <div id="user-info">
                         <div id="photo-container">
                             <img id="photo">
@@ -41,7 +44,6 @@
                         <div id="phone"></div>
                         <div id="is-new-user"></div>
                         <div class="clearfix"></div>
-
                     </div>
                     <h3>Welcome!</h3>
                     <br>
@@ -57,8 +59,8 @@
                                 <br>
                                 <input class="p-3 mb-2 bg-light text-dark" type="text" name="from-control" id="publicMessage">
                             </div>
-                            <button type="button" class="btn btn-dark" onclick="submitClick()">Post Public!</button>
-                            <button type="button" class="btn btn-dark" onclick="submitClickPrivate()">Post Private!</button>
+                            <button type="button" class="btn btn-dark" onclick="submitClick('mensajePublico')">Post Public!</button>
+                            <button type="button" class="btn btn-dark" onclick="submitClick('mensajePrivado')">Post Private!</button>
                             <form id="setMessages">
 
                             </form>
@@ -77,43 +79,10 @@
 
                     <div id="firebaseui-container">
 
-                        <!--<button type="button" class="btn btn-dark" onclick="submitClick()">Update</button>-->
-                        <!--<script type="text/javascript">
-                            var user = firebase.auth().currentUser;
-                            var ref = firebase.database.ref();
-
-                            function submitClick() {
-                                var bane = fName.value;
-                                //ref.child("Users").child(user.uid).child("userName").set(user.displayName);
-                                ref.child("Usuarios").set(user.uid);
-
-                            }
-                        </script>-->
-                        <!--row Es para usar grid-->
-
                     </div>
                 </div>
                 <div id="user-signed-out" class="hidden">
                     <h4>You are signed out.</h4>
-                    <fieldset>
-                        <legend>Configuration</legend>
-                        reCAPTCHA mode for Phone Auth:
-                        <label for="recaptcha-normal">
-                <input type="radio" id="recaptcha-normal" name="recaptcha" value="normal">
-                Normal
-              </label>
-                        <label for="recaptcha-invisible">
-                <input type="radio" id="recaptcha-invisible" name="recaptcha" value="invisible">
-                Invisible
-              </label>
-
-                    </fieldset>
-                    <p>
-                        <button id="sign-in-with-redirect">Sign In with Redirect</button>
-                        <button id="sign-in-with-popup">Sign In with Popup</button>
-                    </p>
-
-
                 </div>
             </div>
         </div>
@@ -121,23 +90,26 @@
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
                 <!--Titulo de Navbar-->
                 <a class="navbar-brand" href="index.html">
-                    <img src="images/coin.png" width="30" height="30 "alt="Coin">
-                    Tostón
+                    <img src="images/coin.png" width="30" height="30 " alt="Coin"> Tostón
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="#">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="profile.html" onclick="printPrivateMessages()">Profile</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
                                 Dropdown
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -151,14 +123,12 @@
                             <a class="nav-link disabled" href="#">Disabled</a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
                 </div>
             </nav>
         </div>
         <script src="app.js"></script>
+
+        <!--Begin Firebase-->
         <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
         <script>
             // Initialize Firebase
@@ -172,6 +142,16 @@
             };
             firebase.initializeApp(config);
         </script>
+        <!--End Firebase-->
+        
+        <!--Begin Bootstrap-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+        <!--End Bootstrap-->
 </body>
 
 </html>
