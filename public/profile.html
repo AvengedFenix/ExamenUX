@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="shortcut icon" href="/images/favicon.ico" />
     <title>Tostón Profile</title>
 </head>
 
@@ -55,6 +57,7 @@
             </nav>
         </div>
         <div class="jumbotron jumbotron-fluid">
+            <script src="code.js"></script>
             <div class="container">
                 <h1 class="display-4">Tostón Profile</h1>
                 <div class="row">
@@ -88,14 +91,31 @@
                             <input type="password" name="from-control" id="password">
                         </div>
                         <button type="button" class="btn btn-dark" onclick="submitClick()">Update</button>
+                        <button type="button" class="btn btn-dark" onclick="printPrivateMessages()">Print private messages</button>
+
 
                     </div>
                 </div>
             </div>
         </div>
-        <h3></h3>
+        <form id="setPrivateMessages">
+
+        </form>
     </div>
     <script src="app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCI-M8s0ejoE6rOzaiJBusXp1exWavWz_Y",
+            authDomain: "examenux-70960.firebaseapp.com",
+            databaseURL: "https://examenux-70960.firebaseio.com",
+            projectId: "examenux-70960",
+            storageBucket: "examenux-70960.appspot.com",
+            messagingSenderId: "254094424764"
+        };
+        firebase.initializeApp(config);
+    </script>
 </body>
 
 </html>
