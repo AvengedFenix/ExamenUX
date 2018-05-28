@@ -128,6 +128,8 @@ var handleSignedInUser = function(user) {
         ref.child("Email").set(user.email);
         ref.child("Phone Number").set(user.phoneNumber);
         ref.child("Photo URL").set(user.photoURL);
+        ref.child("mensajesPublicos").set("0");
+        ref.child("mensajesPrivados").set("0");
     }
 
     if (user.photoURL) {
