@@ -1,6 +1,18 @@
 var ref = firebase.database().ref();
 
 
+function initProfile(){
+    var user = firebase.auth().currentUser;
+    document.getElementById("profile-image1").innerHTML = user.photoURL;
+    document.getElementById("fname").innerHTML = user.displayName;
+    document.getElementById("email").innerHTML = user.email;
+    var refUser = firebase.database().ref().child("Usuarios").child(user.uid);
+    refUser.on('value', function (mensajes) {
+        document.getElementById("mensajesPrivados") = mensajes.child("mensajesPrivados").val();
+        document.getElementById("mensajesPublicos") = mensajes.child("mensajesPublicos").val();
+    })
+};
+
 function setName(user) {
 
     document.getElementById("userNameSignedIn").innerHTML = user.displayName;
@@ -84,39 +96,6 @@ function contando(counterPublic, type, number){
     });
 }
 
-/*function submitClickPrivate() {
-
-    var user = firebase.auth().currentUser;
-    setName(user);
-
-    var mensaje = publicMessage.value;
-    window.alert("Este es su mensaje: " + mensaje);
-
-    console.log("Este es mensaje: " + mensaje);
-    ref.child("Mensajes").push().set({
-        userName: user.displayName,
-        UID: user.uid,
-        mensajePrivado: mensaje
-    });
-
-    var counterPublic = firebase.database().ref().child("Usuarios").child(user.uid);
-
-    var number;
-    counterPublic.child("mensajesPrivados").once('value').then(function (datasnapshot) {
-        number = datasnapshot.val();
-        console.log("Este es number: " + number);
-        //castedNumber = Number(number);
-        if (number == null) {
-            number = 0;
-        }
-        console.log("Despues de la asignación: " + number);
-        counterPublic.child("mensajesPrivados").set(number+1);
-
-
-        //console.log("Numero de mensajes privados: " + castedNumber.toString());
-    });
-    printPrivateMessages();
-}*/
 
 
 //autentificacion INSTANCIA usuario y confirmacion de conexion
@@ -142,21 +121,30 @@ function printMessages() {
         var mensaje = snap.child("mensajePublico").val();
         console.log("mensajePublico: " + mensaje);
         var guestUser = snap.child("UID").val();
+        console.log("Este es guest user: " + guestUser);
+        
         var refUser = firebase.database().ref().child("Usuarios").child(guestUser).child("Photo URL");
-        var guestPhoto;
+        var temp;
         refUser.on('value', function (laFoto) {
+            var guestPhoto;
+            //var temp = laFoto.val();
+            //console.log("Este es temp: " + temp);
+            
             guestPhoto = laFoto.val();
-
+            temp = guestPhoto;
+            console.log("temp: " + temp);
+        
+            console.log("Photo URL: " + temp);
+            var content = "<br><br><div class='card' style='width: 18rem;'>" +
+                "<img class='card-img-top' src='" + temp + "' alt='Card image cap'>" +
+                "<div class='card-body'>" +
+                "<h5 class='card-title'> Post Title </h5> " +
+                "<p class='card-text'>" + mensaje + "</p>" +
+                "<br> <p class='card-text'>" + name + "</p> </div></div>"
+            $("#setMessages").append(content);
         })
-        console.log("Photo URL: " + guestPhoto);
-        var content = "<br><br><div class='card' style='width: 18rem;'>" +
-            "<img class='card-img-top' src='" + guestPhoto + "' alt='Card image cap'>" +
-            "<div class='card-body'>" +
-            "<h5 class='card-title'> Post Title </h5> " +
-            "<p class='card-text'>" + mensaje + "</p>" +
-            "<br> <p class='card-text'>" + name + "</p> </div></div>"
-        $("#setMessages").append(content);
     })
+
 };
 
 function printPrivateMessages() {
@@ -176,14 +164,15 @@ function printPrivateMessages() {
         var guestPhoto;
         refUser.on('value', function (laFoto) {
             guestPhoto = laFoto.val();
+            console.log("Photo URL: " + guestPhoto);
+            var content = "<br><br><div class='card' style='width: 18rem;'>" +
+                "<img class='card-img-top' src='" + guestPhoto + "' alt='Card image cap'>" +
+                "<div class='card-body'>" +
+                "<h5 class='card-title'> Post Title </h5> " +
+                "<p class='card-text'>" + mensaje + "</p>" +
+                "<br> <p class='card-text'>" + name + "</p> </div></div>"
+            $("#setPrivateMessages").append(content);
         })
-        console.log("Photo URL: " + guestPhoto);
-        var content = "<br><br><div class='card' style='width: 18rem;'>" +
-            "<img class='card-img-top' src='" + guestPhoto + "' alt='Card image cap'>" +
-            "<div class='card-body'>" +
-            "<h5 class='card-title'> Post Title </h5> " +
-            "<p class='card-text'>" + mensaje + "</p>" +
-            "<br> <p class='card-text'>" + name + "</p> </div></div>"
-        $("#setPrivateMessages").append(content);
+
     })
 };

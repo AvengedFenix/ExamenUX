@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <!--bootstrap-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
     <link href="style.css" rel="stylesheet" type="text/css" media="screen" />
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -15,80 +16,49 @@
 <body>
     <script src="app.js"></script>
     <div class="container">
-        <div class="navBar">
-            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-                <!--Titulo de Navbar-->
-                <a class="navbar-brand" href="index.html">
-                        <img src="C:\Users\Maslz\OneDrive\Documents\UNITEC\UX\Firebase\FirstProject\firebaseui-web-master\image\coin-money-1.png" width="30" height="30 "alt="Coin">
-                        Tostón
-                    </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="profile.html">Profile</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Dropdown
-                                </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </nav>
-        </div>
         <div class="jumbotron jumbotron-fluid">
-            <script src="code.js"></script>
             <div class="container">
-                <h1 class="display-4">Tostón Profile</h1>
+                <h1 class="display-4 mx-auto">Tostón Profile</h1>
                 <div class="row">
                     <div class="col-sm">
                         <div align="center">
-                            <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive" width="100" height="100">
+                            <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1"
+                                class="img-circle img-responsive mx-auto" width="100" height="100">
 
                             <input id="profile-image-upload" class="hidden" type="file">
-                            <div style="color:#999;">click here to change profile image</div>
+                            <div style="color:#999;"></div>
                             <!--Upload Image Js And Css-->
                             <br>
-                            <label for="fName">First Name</label>
+                            <label class="labels" for="fName">Name</label>
                             <br>
                             <br>
-                            <label for="lName">Last Name</label>
+                            <label class="labels" for="lName">Email</label>
                             <br>
                             <br>
-                            <label for="password">Password</label>
+                            <label class="labels" for="mensajesPrivados">Private M.</label>
+                            <br><br>
+                            <label class="labels" for="mensajesPublicos">Public M.</label>
                         </div>
                     </div>
                     <div class="col-sm">
                         <div class="form-group">
-                            <br><br><br><br><br><br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
                             <!--<input type="text" name="form-control" id="fName">-->
-                            <textarea name="fName" id="fName" placeholder="Your text here..."></textarea>
+                            <p id="fName"></p>
                             <br>
                             <br>
-                            <input type="text" name="form-control" id="lName">
+                            <p id="email"></p>
                             <br>
                             <br>
-                            <input type="password" name="from-control" id="password">
+                            <p id="mensajesPrivados"></p>
+                            <br>
+                            <br>
+                            <p id="mensajesPublicos"></p>
                         </div>
                         <button type="button" class="btn btn-dark" onclick="submitClick()">Update</button>
                         <button type="button" class="btn btn-dark" onclick="printPrivateMessages()">Print private messages</button>
@@ -102,7 +72,36 @@
 
         </form>
     </div>
+    <div class="navBar">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <!--Titulo de Navbar-->
+            <a class="navbar-brand" href="index.html">
+                <img src="images/coin.png" width="30" height="30 " alt="Coin"> Tostón
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html" onclick="printPrivateMessages()">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="signOutNav">Sign out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <script src="app.js"></script>
+    <script src="code.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
     <script>
         // Initialize Firebase
@@ -116,6 +115,14 @@
         };
         firebase.initializeApp(config);
     </script>
+    <!--Begin Bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <!--End Bootstrap-->
 </body>
 
 </html>
